@@ -32,7 +32,7 @@ export default function ContactPage() {
 
     try {
       // Replace YOUR_FORMSPREE_ID with your actual Formspree form ID
-      const res = await fetch("https://formspree.io/f/YOUR_FORMSPREE_ID", {
+      const res = await fetch("https://formspree.io/f/mqewawkk", {
         method: "POST",
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify(form),
@@ -276,16 +276,6 @@ export default function ContactPage() {
                       )}
                     </button>
 
-                    <p
-                      style={{
-                        color: "var(--text-secondary)",
-                        fontSize: "11px",
-                        textAlign: "center",
-                      }}
-                    >
-                      * Replace YOUR_FORMSPREE_ID in contact/page.tsx with your
-                      Formspree form ID to activate submissions.
-                    </p>
                   </form>
                 )}
               </div>
