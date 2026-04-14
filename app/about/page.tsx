@@ -317,21 +317,7 @@ export default function AboutPage() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={social.label}
-                    className="w-9 h-9 flex items-center justify-center rounded border transition-all duration-200"
-                    style={{
-                      borderColor: "rgba(201, 168, 76, 0.2)",
-                      color: "var(--text-secondary)",
-                    }}
-                    onMouseEnter={(e) => {
-                      const el = e.currentTarget as HTMLElement;
-                      el.style.borderColor = "var(--gold-primary)";
-                      el.style.color = "var(--gold-primary)";
-                    }}
-                    onMouseLeave={(e) => {
-                      const el = e.currentTarget as HTMLElement;
-                      el.style.borderColor = "rgba(201, 168, 76, 0.2)";
-                      el.style.color = "var(--text-secondary)";
-                    }}
+                    className="icon-btn"
                   >
                     {social.icon}
                   </a>

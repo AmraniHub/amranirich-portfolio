@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { GithubIcon, LinkedinIcon, InstagramIcon, DiscordIcon } from "./SocialIcons";
 
