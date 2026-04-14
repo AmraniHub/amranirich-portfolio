@@ -22,27 +22,43 @@ export default function VenturesPage() {
     <>
       {/* Page header */}
       <section
+        className="relative overflow-hidden"
         style={{
           background: "var(--bg-primary)",
           paddingTop: "140px",
-          paddingBottom: "60px",
-          borderBottom: "1px solid rgba(201, 168, 76, 0.1)",
+          paddingBottom: "70px",
+          borderBottom: "1px solid rgba(201, 168, 76, 0.08)",
         }}
       >
-        <div className="max-w-7xl mx-auto px-6">
-          <p className="section-label mb-4">Portfolio Companies</p>
+        {/* Gold bloom top-right */}
+        <div
+          className="absolute pointer-events-none"
+          style={{
+            top: "-5%", right: "-5%",
+            width: "55vw", height: "55vw",
+            borderRadius: "50%",
+            background: "radial-gradient(circle, rgba(201,168,76,0.09) 0%, transparent 60%)",
+            filter: "blur(90px)",
+          }}
+          aria-hidden="true"
+        />
+        <div className="relative max-w-7xl mx-auto px-6">
+          <div className="flex items-center gap-4 mb-4">
+            <div style={{ width: 28, height: 1, background: "var(--gold-primary)", boxShadow: "0 0 8px var(--gold-glow)" }} />
+            <p className="section-label" style={{ color: "var(--gold-primary)", letterSpacing: "0.25em" }}>Portfolio Companies</p>
+          </div>
           <h1
-            className="heading-display mb-4"
-            style={{ fontSize: "clamp(32px, 5vw, 60px)" }}
+            className="heading-display mb-5"
+            style={{ fontSize: "clamp(32px, 5vw, 64px)" }}
           >
-            Active Ventures
+            Active <span className="text-glow-gold">Ventures</span>
           </h1>
           <p
             style={{
               color: "var(--text-secondary)",
               fontSize: "15px",
               maxWidth: "520px",
-              lineHeight: 1.7,
+              lineHeight: 1.8,
             }}
           >
             Two operating entities at different stages — one redefining wealth
@@ -53,17 +69,32 @@ export default function VenturesPage() {
 
       {/* ── AMRANIA ──────────────────────────────────────────────────────── */}
       <section
-        className="section-pad"
-        style={{ background: "var(--bg-secondary)" }}
+        className="relative overflow-hidden section-pad"
+        style={{
+          background: "linear-gradient(180deg, var(--bg-secondary) 0%, rgba(6,14,26,0.98) 100%)",
+        }}
         id="amrania"
       >
+        {/* Gold ambient */}
+        <div
+          className="absolute pointer-events-none"
+          style={{
+            top: "20%", left: "-5%",
+            width: "45vw", height: "45vw",
+            borderRadius: "50%",
+            background: "radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 65%)",
+            filter: "blur(80px)",
+          }}
+          aria-hidden="true"
+        />
         <div className="max-w-7xl mx-auto px-6">
           {/* Feature card */}
           <div
-            className="glass-card overflow-hidden mb-16"
+            className="relative glass-card overflow-hidden mb-16"
             style={{
               borderLeft: "4px solid var(--gold-primary)",
               borderRadius: "12px",
+              boxShadow: "0 0 80px rgba(201,168,76,0.06), 0 20px 60px rgba(0,0,0,0.4)",
             }}
           >
             <div className="grid grid-cols-1 lg:grid-cols-2">
@@ -168,7 +199,7 @@ export default function VenturesPage() {
                     href="https://amrania.com"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="btn-gold-fill"
+                    className="btn-gold-fill border-glow-animated"
                   >
                     Visit Amrania
                     <ExternalLink size={12} />
@@ -472,19 +503,34 @@ export default function VenturesPage() {
 
       {/* CTA */}
       <section
+        className="relative overflow-hidden"
         style={{
-          background: "var(--bg-secondary)",
-          padding: "80px 0",
-          borderTop: "1px solid rgba(201,168,76,0.1)",
+          background: "var(--bg-primary)",
+          padding: "100px 0",
+          borderTop: "1px solid rgba(201,168,76,0.08)",
         }}
       >
-        <div className="max-w-3xl mx-auto px-6 text-center">
-          <p className="section-label mb-4">Ready to Collaborate</p>
+        {/* Center bloom */}
+        <div
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+          style={{
+            width: "60vw", height: "50vh",
+            background: "radial-gradient(ellipse at center, rgba(201,168,76,0.07) 0%, transparent 65%)",
+            filter: "blur(60px)",
+          }}
+          aria-hidden="true"
+        />
+        <div className="relative max-w-3xl mx-auto px-6 text-center">
+          <div className="flex items-center justify-center gap-4 mb-4">
+            <div style={{ width: 36, height: 1, background: "rgba(201,168,76,0.4)" }} />
+            <p className="section-label" style={{ color: "var(--gold-primary)" }}>Ready to Collaborate</p>
+            <div style={{ width: 36, height: 1, background: "rgba(201,168,76,0.4)" }} />
+          </div>
           <h2
             className="heading-display mb-6"
-            style={{ fontSize: "clamp(24px, 3.5vw, 42px)" }}
+            style={{ fontSize: "clamp(24px, 3.5vw, 44px)" }}
           >
-            Partner with Amrania or AmraniAds
+            Partner with <span className="text-glow-gold">Amrania</span> or AmraniAds
           </h2>
           <p
             style={{
@@ -497,7 +543,7 @@ export default function VenturesPage() {
             Whether you&apos;re an institutional investor exploring RWA
             tokenization or a brand seeking performance media buying — let&apos;s talk.
           </p>
-          <Link href="/contact" className="btn-gold-fill inline-flex">
+          <Link href="/contact" className="btn-gold-fill inline-flex border-glow-animated">
             Start a Conversation
             <ArrowRight size={14} />
           </Link>

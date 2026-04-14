@@ -53,38 +53,44 @@ export default function ContactPage() {
     <>
       {/* Header */}
       <section
+        className="relative overflow-hidden"
         style={{
           background: "var(--bg-primary)",
           paddingTop: "140px",
-          paddingBottom: "60px",
-          borderBottom: "1px solid rgba(201, 168, 76, 0.1)",
+          paddingBottom: "70px",
+          borderBottom: "1px solid rgba(201, 168, 76, 0.08)",
         }}
       >
-        <div className="max-w-7xl mx-auto px-6">
-          <p className="section-label mb-4">Get in Touch</p>
+        {/* Gold bloom */}
+        <div
+          className="absolute pointer-events-none"
+          style={{
+            top: "-5%", right: "-5%",
+            width: "55vw", height: "55vw",
+            borderRadius: "50%",
+            background: "radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 60%)",
+            filter: "blur(90px)",
+          }}
+          aria-hidden="true"
+        />
+        <div className="relative max-w-7xl mx-auto px-6">
+          <div className="flex items-center gap-4 mb-4">
+            <div style={{ width: 28, height: 1, background: "var(--gold-primary)", boxShadow: "0 0 8px var(--gold-glow)" }} />
+            <p className="section-label" style={{ color: "var(--gold-primary)", letterSpacing: "0.25em" }}>Get in Touch</p>
+          </div>
           <h1
-            className="heading-display mb-4"
-            style={{ fontSize: "clamp(32px, 5vw, 60px)" }}
+            className="heading-display mb-5"
+            style={{ fontSize: "clamp(32px, 5vw, 64px)" }}
           >
             Let&apos;s{" "}
-            <span
-              style={{
-                background:
-                  "linear-gradient(135deg, var(--gold-primary), var(--gold-light))",
-                WebkitBackgroundClip: "text",
-                WebkitTextFillColor: "transparent",
-                backgroundClip: "text",
-              }}
-            >
-              Connect
-            </span>
+            <span className="text-glow-gold">Connect</span>
           </h1>
           <p
             style={{
               color: "var(--text-secondary)",
               fontSize: "15px",
               maxWidth: "520px",
-              lineHeight: 1.7,
+              lineHeight: 1.8,
             }}
           >
             Available for RWA consulting, institutional partnerships, performance
@@ -95,8 +101,10 @@ export default function ContactPage() {
 
       {/* Form + Info */}
       <section
-        className="section-pad"
-        style={{ background: "var(--bg-secondary)" }}
+        className="relative overflow-hidden section-pad"
+        style={{
+          background: "linear-gradient(180deg, var(--bg-secondary) 0%, rgba(2,8,15,0.98) 100%)",
+        }}
       >
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">

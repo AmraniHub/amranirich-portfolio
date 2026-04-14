@@ -16,26 +16,31 @@ function PlaceholderImage({ name }: { name: string }) {
   return (
     <div
       className="w-full h-full flex items-center justify-center"
-      style={{ background: "rgba(201, 168, 76, 0.04)" }}
+      style={{
+        background: "radial-gradient(ellipse at 40% 40%, rgba(201,168,76,0.07) 0%, rgba(2,8,15,0.95) 70%)",
+      }}
     >
       <div className="text-center">
         <div
           style={{
-            width: "56px",
-            height: "56px",
-            border: "1px solid rgba(201, 168, 76, 0.25)",
+            width: "60px",
+            height: "60px",
+            border: "1px solid rgba(201, 168, 76, 0.3)",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            margin: "0 auto 8px",
+            margin: "0 auto 10px",
+            background: "rgba(2,8,15,0.8)",
+            boxShadow: "0 0 20px rgba(201,168,76,0.08)",
           }}
         >
           <span
             style={{
               fontFamily: "var(--font-playfair, serif)",
-              fontSize: "18px",
+              fontSize: "20px",
               fontWeight: 700,
               color: "var(--gold-primary)",
+              filter: "drop-shadow(0 0 8px rgba(201,168,76,0.4))",
             }}
           >
             {initials}
@@ -46,6 +51,7 @@ function PlaceholderImage({ name }: { name: string }) {
             fontSize: "9px",
             color: "var(--gold-muted)",
             letterSpacing: "0.2em",
+            fontFamily: "var(--font-jetbrains, monospace)",
           }}
         >
           {name.toUpperCase()}
@@ -71,12 +77,16 @@ export default function ProjectCard({ project }: { project: Project }) {
 
   const inner = (
     <div
-      className="glass-card overflow-hidden h-full flex flex-col transition-all duration-300"
+      className="glass-card overflow-hidden h-full flex flex-col"
       style={{
         borderColor: hovered
-          ? "rgba(201, 168, 76, 0.4)"
-          : "rgba(201, 168, 76, 0.12)",
-        transform: hovered ? "translateY(-4px)" : "translateY(0)",
+          ? "rgba(201, 168, 76, 0.45)"
+          : "rgba(201, 168, 76, 0.1)",
+        transform: hovered ? "translateY(-6px)" : "translateY(0)",
+        transition: "transform 0.35s cubic-bezier(0.16,1,0.3,1), border-color 0.3s ease, box-shadow 0.35s ease",
+        boxShadow: hovered
+          ? "0 24px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(201,168,76,0.2), 0 0 40px rgba(201,168,76,0.06)"
+          : "0 4px 20px rgba(0,0,0,0.3)",
       }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
@@ -84,36 +94,73 @@ export default function ProjectCard({ project }: { project: Project }) {
       {/* Thumbnail */}
       <div
         className="relative overflow-hidden"
-        style={{ height: "180px", background: "var(--bg-surface)" }}
+        style={{ height: "190px", background: "var(--bg-surface)" }}
       >
         <PlaceholderImage name={project.title} />
 
-        {/* Hover overlay */}
+        {/* Gold shimmer overlay on hover */}
         <div
-          className="absolute inset-0 flex items-center justify-center transition-opacity duration-300"
+          className="absolute inset-0 pointer-events-none"
           style={{
-            background: "rgba(5, 12, 26, 0.75)",
+            background: "linear-gradient(135deg, transparent 40%, rgba(201,168,76,0.04) 100%)",
             opacity: hovered ? 1 : 0,
-            backdropFilter: "blur(2px)",
+            transition: "opacity 0.4s ease",
+          }}
+          aria-hidden="true"
+        />
+
+        {/* Hover CTA overlay */}
+        <div
+          className="absolute inset-0 flex items-center justify-center"
+          style={{
+            background: "rgba(2,8,15,0.8)",
+            opacity: hovered ? 1 : 0,
+            backdropFilter: hovered ? "blur(4px)" : "blur(0px)",
+            transition: "opacity 0.3s ease, backdrop-filter 0.3s ease",
           }}
         >
-          <div className="flex items-center gap-2 btn-gold" style={{ padding: "8px 16px", fontSize: "11px" }}>
+          <div
+            className="flex items-center gap-2"
+            style={{
+              padding: "8px 18px",
+              fontSize: "11px",
+              border: "1px solid rgba(201,168,76,0.5)",
+              color: "var(--gold-light)",
+              letterSpacing: "0.08em",
+              fontFamily: "var(--font-jetbrains, monospace)",
+              background: "rgba(201,168,76,0.06)",
+              transform: hovered ? "translateY(0)" : "translateY(8px)",
+              transition: "transform 0.3s ease",
+            }}
+          >
             View Details <ArrowUpRight size={12} />
           </div>
         </div>
 
-        {/* Category pill top-left */}
+        {/* Category pill */}
         <div className="absolute top-3 left-3">
           <span className="tag-pill">{project.category}</span>
         </div>
+
+        {/* Featured glow top edge */}
+        {project.featured && (
+          <div
+            className="absolute top-0 left-0 right-0"
+            style={{
+              height: "2px",
+              background: "linear-gradient(90deg, transparent, var(--gold-primary), var(--gold-light), var(--gold-primary), transparent)",
+            }}
+            aria-hidden="true"
+          />
+        )}
       </div>
 
       {/* Content */}
       <div className="flex flex-col flex-1 p-5">
-        <div className="flex items-start justify-between mb-2">
+        <div className="flex items-start justify-between mb-3">
           <h3
             className="heading-serif"
-            style={{ fontSize: "17px", flex: 1, marginRight: "8px" }}
+            style={{ fontSize: "17px", flex: 1, marginRight: "8px", lineHeight: 1.3 }}
           >
             {project.title}
           </h3>
@@ -125,11 +172,20 @@ export default function ProjectCard({ project }: { project: Project }) {
           style={{
             color: "var(--text-secondary)",
             fontSize: "13px",
-            lineHeight: 1.65,
+            lineHeight: 1.7,
           }}
         >
           {project.description}
         </p>
+
+        {/* Divider */}
+        <div
+          style={{
+            height: "1px",
+            background: "linear-gradient(90deg, rgba(201,168,76,0.15), transparent)",
+            marginBottom: "12px",
+          }}
+        />
 
         {/* Tags */}
         <div className="flex flex-wrap gap-1.5">

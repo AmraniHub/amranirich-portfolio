@@ -37,33 +37,51 @@ export default function AboutPage() {
     <>
       {/* Page header */}
       <section
+        className="relative overflow-hidden"
         style={{
           background: "var(--bg-primary)",
           paddingTop: "140px",
-          paddingBottom: "80px",
+          paddingBottom: "90px",
         }}
       >
-        <div className="max-w-7xl mx-auto px-6">
+        {/* Atmospheric blooms */}
+        <div
+          className="absolute pointer-events-none"
+          style={{
+            top: "-5%", right: "-5%",
+            width: "55vw", height: "55vw",
+            borderRadius: "50%",
+            background: "radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 60%)",
+            filter: "blur(90px)",
+          }}
+          aria-hidden="true"
+        />
+        <div
+          className="absolute pointer-events-none"
+          style={{
+            bottom: "0", left: "-5%",
+            width: "40vw", height: "40vw",
+            borderRadius: "50%",
+            background: "radial-gradient(circle, rgba(15,40,100,0.1) 0%, transparent 65%)",
+            filter: "blur(80px)",
+          }}
+          aria-hidden="true"
+        />
+
+        <div className="relative max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Text */}
             <div>
-              <p className="section-label mb-4">About</p>
+              <div className="flex items-center gap-4 mb-4">
+                <div style={{ width: 28, height: 1, background: "var(--gold-primary)", boxShadow: "0 0 8px var(--gold-glow)" }} />
+                <p className="section-label" style={{ color: "var(--gold-primary)", letterSpacing: "0.25em" }}>About</p>
+              </div>
               <h1
                 className="heading-display mb-6"
                 style={{ fontSize: "clamp(32px, 5vw, 60px)" }}
               >
                 Abdelali{" "}
-                <span
-                  style={{
-                    background:
-                      "linear-gradient(135deg, var(--gold-primary), var(--gold-light))",
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                    backgroundClip: "text",
-                  }}
-                >
-                  El Amrani
-                </span>
+                <span className="text-glow-gold">El Amrani</span>
               </h1>
               <p
                 className="heading-serif mb-4"
@@ -85,7 +103,7 @@ export default function AboutPage() {
                 mindset into Amrania, a tokenized real estate platform being
                 built for UHNWIs and family offices in Dubai.
               </p>
-              <div className="flex items-center gap-4 mt-6 flex-wrap">
+              <div className="flex items-center gap-4 mt-7 flex-wrap">
                 <span
                   className="flex items-center gap-1.5"
                   style={{ color: "var(--text-secondary)", fontSize: "13px" }}
@@ -154,31 +172,35 @@ export default function AboutPage() {
 
       {/* Philosophy */}
       <section
+        className="relative overflow-hidden"
         style={{
-          background: "var(--bg-secondary)",
-          padding: "60px 0",
-          borderTop: "1px solid rgba(201, 168, 76, 0.1)",
-          borderBottom: "1px solid rgba(201, 168, 76, 0.1)",
+          background: "linear-gradient(180deg, var(--bg-secondary) 0%, rgba(6,14,26,0.98) 100%)",
+          padding: "80px 0",
+          borderTop: "1px solid rgba(201, 168, 76, 0.08)",
+          borderBottom: "1px solid rgba(201, 168, 76, 0.08)",
         }}
       >
-        <div className="max-w-3xl mx-auto px-6 text-center">
+        {/* Center glow */}
+        <div
+          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none"
+          style={{
+            width: "60vw", height: "40vh",
+            background: "radial-gradient(ellipse at center, rgba(201,168,76,0.07) 0%, transparent 65%)",
+            filter: "blur(60px)",
+          }}
+          aria-hidden="true"
+        />
+        <div className="relative max-w-3xl mx-auto px-6 text-center">
           <p className="section-label mb-6">Philosophy</p>
           <blockquote
-            className="heading-display"
-            style={{
-              fontSize: "clamp(24px, 4vw, 44px)",
-              background:
-                "linear-gradient(135deg, var(--gold-primary) 0%, var(--gold-light) 50%, var(--gold-primary) 100%)",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-            }}
+            className="shimmer-text heading-display"
+            style={{ fontSize: "clamp(24px, 4vw, 46px)" }}
           >
             &ldquo;I build systems that move capital.&rdquo;
           </blockquote>
           <p
             className="mt-6"
-            style={{ color: "var(--text-secondary)", fontSize: "14px" }}
+            style={{ color: "var(--text-dim)", fontSize: "13px", fontFamily: "var(--font-jetbrains, monospace)", letterSpacing: "0.1em" }}
           >
             — Abdelali El Amrani, amranirich
           </p>

@@ -7,13 +7,14 @@ interface Stat {
   suffix: string;
   prefix?: string;
   label: string;
+  sublabel?: string;
 }
 
 const stats: Stat[] = [
-  { value: 29, suffix: "", label: "Certifications" },
-  { value: 6800, suffix: "+", label: "LinkedIn Followers" },
-  { value: 3, suffix: "", label: "Active Ventures" },
-  { value: 500, suffix: "+", label: "Network Connections" },
+  { value: 29, suffix: "", label: "Certifications", sublabel: "Verified credentials" },
+  { value: 6800, suffix: "+", label: "LinkedIn Followers", sublabel: "Industry network" },
+  { value: 3, suffix: "", label: "Active Ventures", sublabel: "Operating entities" },
+  { value: 500, suffix: "+", label: "Network Connections", sublabel: "Global reach" },
 ];
 
 function Counter({
@@ -32,7 +33,7 @@ function Counter({
   useEffect(() => {
     if (!trigger) return;
     let start = 0;
-    const duration = 1800;
+    const duration = 2000;
     const step = Math.ceil(value / (duration / 16));
 
     const timer = setInterval(() => {
@@ -79,24 +80,43 @@ export default function StatsStrip() {
   return (
     <div
       ref={ref}
-      className="grid grid-cols-2 md:grid-cols-4 gap-px"
-      style={{ borderTop: "1px solid var(--border-gold)" }}
+      className="relative grid grid-cols-2 md:grid-cols-4"
+      style={{
+        borderTop: "1px solid rgba(201,168,76,0.12)",
+        background: "linear-gradient(180deg, rgba(6,14,26,0.95) 0%, rgba(2,8,15,0.98) 100%)",
+      }}
     >
+      {/* Subtle top shimmer line */}
+      <div
+        className="absolute top-0 left-0 right-0"
+        style={{
+          height: "1px",
+          background: "linear-gradient(90deg, transparent, rgba(201,168,76,0.4) 20%, rgba(240,208,128,0.7) 50%, rgba(201,168,76,0.4) 80%, transparent)",
+        }}
+        aria-hidden="true"
+      />
+
       {stats.map((stat, i) => (
         <div
           key={i}
-          className="flex flex-col items-center justify-center py-8 px-4 text-center"
+          className="relative flex flex-col items-center justify-center py-10 px-6 text-center group"
           style={{
-            background: i % 2 === 0 ? "var(--bg-secondary)" : "var(--bg-primary)",
-            borderRight:
-              i < stats.length - 1
-                ? "1px solid rgba(201, 168, 76, 0.08)"
-                : "none",
+            borderRight: i < stats.length - 1 ? "1px solid rgba(201,168,76,0.07)" : "none",
           }}
         >
+          {/* Hover glow */}
+          <div
+            className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+            style={{
+              background: "radial-gradient(ellipse at center, rgba(201,168,76,0.05) 0%, transparent 70%)",
+            }}
+            aria-hidden="true"
+          />
+
+          {/* Number */}
           <p
-            className="heading-display mb-1"
-            style={{ fontSize: "clamp(28px, 4vw, 40px)", color: "var(--gold-primary)" }}
+            className="stat-number mb-1"
+            style={{ fontSize: "clamp(30px, 4vw, 44px)" }}
           >
             <Counter
               value={stat.value}
@@ -105,12 +125,28 @@ export default function StatsStrip() {
               trigger={triggered}
             />
           </p>
+
+          {/* Label */}
           <p
             className="section-label"
-            style={{ color: "var(--text-secondary)", fontSize: "10px" }}
+            style={{ color: "var(--text-primary)", fontSize: "11px", marginBottom: "3px" }}
           >
             {stat.label}
           </p>
+
+          {/* Sublabel */}
+          {stat.sublabel && (
+            <p
+              style={{
+                color: "var(--text-dim)",
+                fontSize: "9px",
+                letterSpacing: "0.1em",
+                fontFamily: "var(--font-jetbrains, monospace)",
+              }}
+            >
+              {stat.sublabel}
+            </p>
+          )}
         </div>
       ))}
     </div>
